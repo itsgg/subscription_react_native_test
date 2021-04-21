@@ -1,20 +1,25 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useSubscription } from '@apollo/react-hooks';
 import { View, Text } from 'react-native';
 
-export const CURRENT_USER_QUERY = gql`
-  query currentUser {
-    currentUser {
+const SCRATCH_CARD_CREATED_SUBSCRIPTION = gql`
+  subscription scratchCardCreated {
+    scratchCardCreated {
       id
-      mobile
-      name
+      stamp {
+        name
+        id
+        imageUrl
+      }
     }
   }
 `;
 
 const User = () => {
-  const { data, error, loading } = useQuery(CURRENT_USER_QUERY);
+  const { data, error, loading } = useSubscription(
+    SCRATCH_CARD_CREATED_SUBSCRIPTION,
+  );
 
   if (error) {
     console.error(error);

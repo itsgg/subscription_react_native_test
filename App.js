@@ -11,6 +11,7 @@ import { ApolloProvider } from 'react-apollo';
 import { View, Text } from 'react-native';
 import ApolloClient from './apollo';
 import User from './User';
+import ScratchCard from './ScratchCard';
 
 const Main = () => {
   const [client, setClient] = React.useState(client);
@@ -29,8 +30,9 @@ const Main = () => {
   } else {
     return (
       <ApolloProvider client={client}>
-        <User />
         <Text>Apollo Ready</Text>
+        <User />
+        <ScratchCard />
       </ApolloProvider>
     );
   }
