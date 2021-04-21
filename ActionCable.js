@@ -12,10 +12,13 @@ ActionCable.Connection.prototype.open = function() {
 };
 
 if (Platform.OS == 'ios' || Platform.OS == 'android') {
-  global.document = {
-    addEventListener() {},
-    removeEventListener() {},
-  };
+  if (global.document === undefined) {
+    global.document = {
+      addEventListener() {},
+      removeEventListener() {},
+    };
+  }
+
   global.__APOLLO_DEVTOOLS_GLOBAL_HOOK__ = '';
 }
 
